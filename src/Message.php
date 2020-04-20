@@ -158,10 +158,10 @@ final class Message implements MessageInterface
     }
 
     /**
-     * @param string $replyTo
+     * @param string|null $replyTo
      * @return $this
      */
-    public function setReplyTo(string $replyTo): self
+    public function setReplyTo(?string $replyTo): self
     {
         $this->replyTo = $replyTo;
         return $this;

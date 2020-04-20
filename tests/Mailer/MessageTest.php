@@ -16,7 +16,7 @@ use Spiral\Mailer\Message;
 
 class MessageTest extends TestCase
 {
-    public function testDefaults()
+    public function testDefaults(): void
     {
         $m = new Message('test', 'email@domain.com');
         $this->assertSame('test', $m->getSubject());

@@ -1,4 +1,4 @@
-Implementation-less Mailing interfaces
+Mailing interfaces
 ========
 [![Latest Stable Version](https://poser.pugx.org/spiral/mailer/v/stable)](https://packagist.org/packages/spiral/mailer) 
 [![Build Status](https://github.com/spiral/mailer/workflows/build/badge.svg)](https://github.com/spiral/mailer/actions)

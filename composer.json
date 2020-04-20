@@ -1,0 +1,30 @@
+{
+  "name": "spiral/mailer",
+  "type": "library",
+  "description": "Implementation-less mailing interfaces",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Anton Titov / Wolfy-J",
+      "email": "wolfy.jd@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~8.0",
+    "mockery/mockery": "^1.1",
+    "spiral/code-style": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Spiral\\Mailer\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Spiral\\Mailer\\Tests\\": "tests/Mailer/"
+    }
+  }
+}

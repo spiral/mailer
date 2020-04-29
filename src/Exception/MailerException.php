@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Spiral\Mailer\Exception;
 
-class MailerException extends \RuntimeException
+use RuntimeException;
+
+class MailerException extends RuntimeException
 {
 }

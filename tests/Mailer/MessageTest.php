@@ -39,6 +39,12 @@ class MessageTest extends TestCase
         $this->assertSame(['hello' => 'world'], $m->getData());
     }
 
+    public function testArrayTo(): void
+    {
+        $m = new Message('test', ['email@domain.com', 'email2@domain.com']);
+        $this->assertSame(['email@domain.com', 'email2@domain.com'], $m->getTo());
+    }
+
     public function testCC(): void
     {
         $m = new Message('test', 'email@domain.com');

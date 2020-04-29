@@ -24,25 +24,32 @@ class MessageTest extends TestCase
         $this->assertSame([], $m->getData());
         $this->assertSame([], $m->getCC());
         $this->assertSame([], $m->getBCC());
-        $this->assertSame(null, $m->getFrom());
-        $this->assertSame(null, $m->getReplyTo());
+        $this->assertNull($m->getFrom());
+        $this->assertNull($m->getReplyTo());
     }
 
     public function testData(): void
     {
         $m = new Message('test', 'email@domain.com');
-
         $this->assertSame([], $m->getData());
 
         $m->setData(['hello' => 'world']);
-
         $this->assertSame(['hello' => 'world'], $m->getData());
     }
 
-    public function testArrayTo(): void
+    public function testTo(): void
     {
         $m = new Message('test', ['email@domain.com', 'email2@domain.com']);
         $this->assertSame(['email@domain.com', 'email2@domain.com'], $m->getTo());
+
+        $m->setTo('email@domain.com');
+        $this->assertSame(['email@domain.com'], $m->getTo());
+
+        $m->setTo('email@domain.com', 'another@domain.com');
+        $this->assertSame(['email@domain.com', 'another@domain.com'], $m->getTo());
+
+        $m->setTo();
+        $this->assertSame([], $m->getTo());
     }
 
     public function testCC(): void
@@ -55,6 +62,9 @@ class MessageTest extends TestCase
 
         $m->setCC('email@domain.com', 'another@domain.com');
         $this->assertSame(['email@domain.com', 'another@domain.com'], $m->getCC());
+
+        $m->setCC();
+        $this->assertSame([], $m->getCC());
     }
 
     public function testBCC(): void
@@ -67,31 +77,34 @@ class MessageTest extends TestCase
 
         $m->setBCC('email@domain.com', 'another@domain.com');
         $this->assertSame(['email@domain.com', 'another@domain.com'], $m->getBCC());
+
+        $m->setBCC();
+        $this->assertSame([], $m->getBCC());
     }
 
     public function testFrom(): void
     {
         $m = new Message('test', 'email@domain.com');
 
-        $this->assertSame(null, $m->getFrom());
+        $this->assertNull($m->getFrom());
 
         $m->setFrom('email@domain.com');
         $this->assertSame('email@domain.com', $m->getFrom());
 
         $m->setFrom(null);
-        $this->assertSame(null, $m->getFrom());
+        $this->assertNull($m->getFrom());
     }
 
-    public function testReplyFrom(): void
+    public function testReplyTo(): void
     {
         $m = new Message('test', 'email@domain.com');
 
-        $this->assertSame(null, $m->getReplyTo());
+        $this->assertNull($m->getReplyTo());
 
         $m->setReplyTo('email@domain.com');
         $this->assertSame('email@domain.com', $m->getReplyTo());
 
         $m->setReplyTo(null);
-        $this->assertSame(null, $m->getReplyTo());
+        $this->assertNull($m->getReplyTo());
     }
 }

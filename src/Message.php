@@ -17,16 +17,16 @@ final class Message implements MessageInterface
     private $subject;
 
     /** @var array */
-    private $to;
-
-    /** @var array */
     private $data;
 
     /** @var array */
-    private $cc;
+    private $to = [];
 
     /** @var array */
-    private $bcc;
+    private $cc = [];
+
+    /** @var array */
+    private $bcc = [];
 
     /** @var string|null */
     private $from;
@@ -36,7 +36,7 @@ final class Message implements MessageInterface
 
     /**
      * @param string $subject
-     * @param string|array $to
+     * @param string|string[] $to
      * @param array $data
      */
     public function __construct(string $subject, $to, array $data = [])
@@ -53,6 +53,7 @@ final class Message implements MessageInterface
     public function setSubject(string $subject): self
     {
         $this->subject = $subject;
+
         return $this;
     }
 
@@ -71,6 +72,7 @@ final class Message implements MessageInterface
     public function setData(array $data): self
     {
         $this->data = $data;
+
         return $this;
     }
 
@@ -83,12 +85,12 @@ final class Message implements MessageInterface
     }
 
     /**
-     * @param string|array $to
+     * @param string ...$to
      * @return $this
      */
-    public function setTo($to): self
+    public function setTo(string ...$to): self
     {
-        $this->to = is_array($to) ? $to : func_get_args();
+        $this->to = $to;
 
         return $this;
     }
@@ -102,12 +104,12 @@ final class Message implements MessageInterface
     }
 
     /**
-     * @param string|array $cc
+     * @param string ...$cc
      * @return $this
      */
-    public function setCC($cc): self
+    public function setCC(string ...$cc): self
     {
-        $this->cc = is_array($cc) ? $cc : func_get_args();
+        $this->cc = $cc;
 
         return $this;
     }
@@ -117,16 +119,16 @@ final class Message implements MessageInterface
      */
     public function getCC(): array
     {
-        return $this->cc ?? [];
+        return $this->cc;
     }
 
     /**
-     * @param string|array $bcc
+     * @param string ...$bcc
      * @return $this
      */
-    public function setBCC($bcc): self
+    public function setBCC(string ...$bcc): self
     {
-        $this->bcc = is_array($bcc) ? $bcc : func_get_args();
+        $this->bcc = $bcc;
 
         return $this;
     }
@@ -136,7 +138,7 @@ final class Message implements MessageInterface
      */
     public function getBCC(): array
     {
-        return $this->bcc ?? [];
+        return $this->bcc;
     }
 
     /**
@@ -146,6 +148,7 @@ final class Message implements MessageInterface
     public function setFrom(?string $from): self
     {
         $this->from = $from;
+
         return $this;
     }
 
@@ -164,6 +167,7 @@ final class Message implements MessageInterface
     public function setReplyTo(?string $replyTo): self
     {
         $this->replyTo = $replyTo;
+
         return $this;
     }
 

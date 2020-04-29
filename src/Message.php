@@ -42,7 +42,13 @@ final class Message implements MessageInterface
     public function __construct(string $subject, $to, array $data = [])
     {
         $this->setSubject($subject);
-        $this->setTo($to);
+
+        if (is_array($to)) {
+            $this->setTo(...$to);
+        } else {
+            $this->setTo($to);
+        }
+
         $this->setData($data);
     }
 

@@ -37,6 +37,18 @@ class MessageTest extends TestCase
         $this->assertSame(['hello' => 'world'], $m->getData());
     }
 
+    public function testOptions(): void
+    {
+        $m = new Message('test', 'email@domain.com');
+        $this->assertSame([], $m->getOptions());
+
+        $m->setOptions(['hello' => 'world']);
+        $this->assertSame(['hello' => 'world'], $m->getOptions());
+
+        $m->setOption('k', 'v');
+        $this->assertSame(['hello' => 'world', 'k' => 'v'], $m->getOptions());
+    }
+
     public function testTo(): void
     {
         $m = new Message('test', ['email@domain.com', 'email2@domain.com']);

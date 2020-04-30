@@ -61,4 +61,11 @@ interface MessageInterface
      * @return string|null
      */
     public function getReplyTo(): ?string;
+
+    /**
+     * Implementation specific options.
+     *
+     * @return array
+     */
+    public function getOptions(): array;
 }

@@ -34,15 +34,18 @@ final class Message implements MessageInterface
     /** @var string|null */
     private $replyTo;
 
+    /** @var array */
+    private $options = [];
+
     /**
-     * @param string $subject
+     * @param string          $subject
      * @param string|string[] $to
-     * @param array $data
+     * @param array           $data
      */
     public function __construct(string $subject, $to, array $data = [])
     {
         $this->setSubject($subject);
-        $this->setTo(...(array)$to);
+        $this->setTo(...(array) $to);
         $this->setData($data);
     }
 
@@ -177,5 +180,36 @@ final class Message implements MessageInterface
     public function getReplyTo(): ?string
     {
         return $this->replyTo;
+    }
+
+    /**
+     * @param array $options
+     * @return $this
+     */
+    public function setOptions(array $options): self
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $value
+     * @return $this
+     */
+    public function setOption(string $name, $value): self
+    {
+        $this->options[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
     }
 }

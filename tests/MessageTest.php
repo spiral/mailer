@@ -12,143 +12,143 @@ class MessageTest extends TestCase
     public function testDefaults(): void
     {
         $m = new Message('test', 'email@domain.com');
-        self::assertSame('test', $m->getSubject());
-        self::assertSame(['email@domain.com'], $m->getTo());
-        self::assertSame([], $m->getData());
-        self::assertSame([], $m->getCC());
-        self::assertSame([], $m->getBCC());
-        self::assertNull($m->getFrom());
-        self::assertNull($m->getReplyTo());
+        $this->assertSame('test', $m->getSubject());
+        $this->assertSame(['email@domain.com'], $m->getTo());
+        $this->assertSame([], $m->getData());
+        $this->assertSame([], $m->getCC());
+        $this->assertSame([], $m->getBCC());
+        $this->assertNull($m->getFrom());
+        $this->assertNull($m->getReplyTo());
     }
 
     public function testData(): void
     {
         $m = new Message('test', 'email@domain.com');
-        self::assertSame([], $m->getData());
+        $this->assertSame([], $m->getData());
 
         $m->setData(['hello' => 'world']);
-        self::assertSame(['hello' => 'world'], $m->getData());
+        $this->assertSame(['hello' => 'world'], $m->getData());
     }
 
     public function testOptions(): void
     {
         $m = new Message('test', 'email@domain.com');
-        self::assertSame([], $m->getOptions());
+        $this->assertSame([], $m->getOptions());
 
         $m->setOptions(['hello' => 'world']);
-        self::assertSame(['hello' => 'world'], $m->getOptions());
+        $this->assertSame(['hello' => 'world'], $m->getOptions());
 
         $m->setOption('k', 'v');
-        self::assertSame(['hello' => 'world', 'k' => 'v'], $m->getOptions());
+        $this->assertSame(['hello' => 'world', 'k' => 'v'], $m->getOptions());
     }
 
     public function testTo(): void
     {
         $m = new Message('test', ['email@domain.com', 'email2@domain.com']);
-        self::assertSame(['email@domain.com', 'email2@domain.com'], $m->getTo());
+        $this->assertSame(['email@domain.com', 'email2@domain.com'], $m->getTo());
 
         $m->setTo('email@domain.com');
-        self::assertSame(['email@domain.com'], $m->getTo());
+        $this->assertSame(['email@domain.com'], $m->getTo());
 
         $m->setTo('email@domain.com', 'another@domain.com');
-        self::assertSame(['email@domain.com', 'another@domain.com'], $m->getTo());
+        $this->assertSame(['email@domain.com', 'another@domain.com'], $m->getTo());
 
         $m->setTo();
-        self::assertSame([], $m->getTo());
+        $this->assertSame([], $m->getTo());
     }
 
     public function testCC(): void
     {
         $m = new Message('test', 'email@domain.com');
 
-        self::assertSame([], $m->getCC());
+        $this->assertSame([], $m->getCC());
         $m->setCC('email@domain.com');
-        self::assertSame(['email@domain.com'], $m->getCC());
+        $this->assertSame(['email@domain.com'], $m->getCC());
 
         $m->setCC('email@domain.com', 'another@domain.com');
-        self::assertSame(['email@domain.com', 'another@domain.com'], $m->getCC());
+        $this->assertSame(['email@domain.com', 'another@domain.com'], $m->getCC());
 
         $m->setCC();
-        self::assertSame([], $m->getCC());
+        $this->assertSame([], $m->getCC());
     }
 
     public function testBCC(): void
     {
         $m = new Message('test', 'email@domain.com');
 
-        self::assertSame([], $m->getBCC());
+        $this->assertSame([], $m->getBCC());
         $m->setBCC('email@domain.com');
-        self::assertSame(['email@domain.com'], $m->getBCC());
+        $this->assertSame(['email@domain.com'], $m->getBCC());
 
         $m->setBCC('email@domain.com', 'another@domain.com');
-        self::assertSame(['email@domain.com', 'another@domain.com'], $m->getBCC());
+        $this->assertSame(['email@domain.com', 'another@domain.com'], $m->getBCC());
 
         $m->setBCC();
-        self::assertSame([], $m->getBCC());
+        $this->assertSame([], $m->getBCC());
     }
 
     public function testFrom(): void
     {
         $m = new Message('test', 'email@domain.com');
 
-        self::assertNull($m->getFrom());
+        $this->assertNull($m->getFrom());
 
         $m->setFrom('email@domain.com');
-        self::assertSame('email@domain.com', $m->getFrom());
+        $this->assertSame('email@domain.com', $m->getFrom());
 
         $m->setFrom(null);
-        self::assertNull($m->getFrom());
+        $this->assertNull($m->getFrom());
     }
 
     public function testReplyTo(): void
     {
         $m = new Message('test', 'email@domain.com');
 
-        self::assertNull($m->getReplyTo());
+        $this->assertNull($m->getReplyTo());
 
         $m->setReplyTo('email@domain.com');
-        self::assertSame('email@domain.com', $m->getReplyTo());
+        $this->assertSame('email@domain.com', $m->getReplyTo());
 
         $m->setReplyTo(null);
-        self::assertNull($m->getReplyTo());
+        $this->assertNull($m->getReplyTo());
     }
 
-    public function testSetDelayInSeconds(): void
+    public function testSetDelayInSeconds()
     {
         $m = new Message('test', 'email@domain.com');
         $m->setDelay(100);
 
-        self::assertSame([
+        $this->assertSame([
             'delay' => 100
         ], $m->getOptions());
     }
 
-    public function testSetDelayInDateInterval(): void
+    public function testSetDelayInDateInterval()
     {
         $m = new Message('test', 'email@domain.com');
         $m->setDelay(new \DateInterval('PT56S'));
 
-        self::assertSame([
+        $this->assertSame([
             'delay' => 56
         ], $m->getOptions());
     }
 
-    public function testSetDelayInDateTime(): void
+    public function testSetDelayInDateTime()
     {
         $m = new Message('test', 'email@domain.com');
         $m->setDelay(new \DateTimeImmutable('+ 123 second'));
 
-        self::assertSame([
+        $this->assertSame([
             'delay' => 123
         ], $m->getOptions());
     }
 
-    public function testSetDelayInDateTimeWithPastTime(): void
+    public function testSetDelayInDateTimeWithPastTime()
     {
         $m = new Message('test', 'email@domain.com');
         $m->setDelay(new \DateTimeImmutable('- 123 second'));
 
-        self::assertSame([
+        $this->assertSame([
             'delay' => 0
         ], $m->getOptions());
     }
